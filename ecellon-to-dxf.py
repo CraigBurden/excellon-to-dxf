@@ -53,8 +53,8 @@ final_drill_list = compile_drill_list(tool_list, drills_list)
 drawing = ezdxf.new('R2010')
 modelspace = drawing.modelspace()
 
-for drill in drills_list:
-    modelspace.add_circle((final_drill_list['x'], final_drill_list['y']), (final_drill_list['radius'] + (size_adjustment / 2)))
+for drill in final_drill_list:
+    modelspace.add_circle((drill['x'], drill['y']), (drill['radius'] + (size_adjustment / 2)))
 
 drawing.saveas(output_filename)
 file.close()
