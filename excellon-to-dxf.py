@@ -36,7 +36,8 @@ def compile_drill_list(tool_list, drill_list):
 parser = argparse.ArgumentParser(description='Excellon to DXF Converter')
 parser.add_argument("--input", required = True, help = "Input DRL file")
 parser.add_argument("--output", default = "output.dxf", help = "Output DXF file")
-parser.add_argument("--adjust", default = 0, help = "Adjustment to the Diameter of each drill")
+parser.add_argument("--adjust", default = 0, help = "Adjustment to the diameter of each drill, positive values add to diameters, defaults to 0mm")
+parser.add_argument("--scale", default = 1, help = "Apply a global scaling factor, defaults to 1")
 args = parser.parse_args()
 
 input_filename = args.input
@@ -54,7 +55,7 @@ drawing = ezdxf.new('R2010')
 modelspace = drawing.modelspace()
 
 for drill in final_drill_list:
-    modelspace.add_circle((drill['x'], drill['y']), (drill['radius'] + (size_adjustment / 2)))
+    modelspace.add_circle(((drill['x'] * scale), (drill['y'] * scale)), ((drill['radius'] + (size_adjustment / 2)) * scale))
 
 drawing.saveas(output_filename)
 file.close()
