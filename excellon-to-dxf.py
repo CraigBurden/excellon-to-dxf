@@ -53,6 +53,7 @@ drills_list = excellon_get_drills(file_contents)
 final_drill_list = compile_drill_list(tool_list, drills_list)
 
 drawing = ezdxf.new('R2010')
+drawing.units = ezdxf.units.MM
 modelspace = drawing.modelspace()
 
 for drill in final_drill_list:
