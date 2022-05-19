@@ -43,6 +43,7 @@ args = parser.parse_args()
 input_filename = args.input
 output_filename = args.output
 size_adjustment = float(args.adjust)
+scale = float(args.scale)
 
 file = open(input_filename, 'r')
 file_contents = file.read()
